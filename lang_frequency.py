@@ -1,5 +1,6 @@
 import sys
 import re
+from collections import Counter
 
 
 def load_data(path_to_file):
@@ -8,34 +9,11 @@ def load_data(path_to_file):
     return init_text
 
 
-def get_frequencies_dict(init_text):
-    words_list = re.split(r'[ _.,:;!?*\—\-\n\\\(\)\[\]\{\}\/\'\"\`\’]+',
-                          init_text.lower())
-
-    words_frequencies_dict = {}
-    for word in words_list:
-        if word not in words_frequencies_dict.keys():
-            words_frequencies_dict[word] = 1
-        else:
-            words_frequencies_dict[word] += 1
-    return words_frequencies_dict
-
-
 def get_most_frequent_words(init_text):
-    words_frequencies_dict = get_frequencies_dict(init_text)
-
-    frequencies_list = []
-    for key in words_frequencies_dict.keys():
-        frequencies_list.append(words_frequencies_dict[key])
-    frequencies_list.sort()
-    frequencies_list.reverse()
-
-    number_of_words = 10
-    for number in range(number_of_words):
-        for key in words_frequencies_dict.keys():
-            if words_frequencies_dict[key] == frequencies_list[number]:
-                print(str(number+1) + " : " + key + ' - ' +
-                      str(words_frequencies_dict[key]))
+    words_list = re.findall(r'\w+', init_text.lower())
+    ten_most_frequent_words = Counter(words_list).most_common(10)
+    for word in ten_most_frequent_words:
+        print(str(word[0]) + " - " + str(word[1]))
 
 
 if __name__ == '__main__':
