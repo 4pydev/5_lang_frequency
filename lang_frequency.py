@@ -11,7 +11,8 @@ def load_data(path_to_file):
 
 def get_most_frequent_words(init_text):
     words_list = re.findall(r'\w+', init_text.lower())
-    ten_most_frequent_words = Counter(words_list).most_common(10)
+    number_of_words = 10
+    ten_most_frequent_words = Counter(words_list).most_common(number_of_words)
     for word in ten_most_frequent_words:
         print(str(word[0]) + " - " + str(word[1]))
 
