@@ -8,29 +8,34 @@ def load_data(path_to_file):
     return init_text
 
 
-def get_most_frequent_words(text):
+def get_frequencies_dict(init_text):
     words_list = re.split(r'[ _.,:;!?*\—\-\n\\\(\)\[\]\{\}\/\'\"\`\’]+',
-                          text.lower())
+                          init_text.lower())
 
-    words_frequent_dict = {}
+    words_frequencies_dict = {}
     for word in words_list:
-        if word not in words_frequent_dict.keys():
-            words_frequent_dict[word] = 1
+        if word not in words_frequencies_dict.keys():
+            words_frequencies_dict[word] = 1
         else:
-            words_frequent_dict[word] += 1
+            words_frequencies_dict[word] += 1
+    return words_frequencies_dict
+
+
+def get_most_frequent_words(init_text):
+    words_frequencies_dict = get_frequencies_dict(init_text)
 
     frequencies_list = []
-    for key in words_frequent_dict.keys():
-        frequencies_list.append(words_frequent_dict[key])
+    for key in words_frequencies_dict.keys():
+        frequencies_list.append(words_frequencies_dict[key])
     frequencies_list.sort()
     frequencies_list.reverse()
 
     number_of_words = 10
     for i in range(number_of_words):
-        for key in words_frequent_dict.keys():
-            if words_frequent_dict[key] == frequencies_list[i]:
+        for key in words_frequencies_dict.keys():
+            if words_frequencies_dict[key] == frequencies_list[i]:
                 print(str(i+1) + " : " + key + ' - ' +
-                      str(words_frequent_dict[key]))
+                      str(words_frequencies_dict[key]))
 
 
 if __name__ == '__main__':
