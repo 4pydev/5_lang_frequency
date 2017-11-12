@@ -31,10 +31,10 @@ def get_most_frequent_words(init_text):
     frequencies_list.reverse()
 
     number_of_words = 10
-    for i in range(number_of_words):
+    for number in range(number_of_words):
         for key in words_frequencies_dict.keys():
-            if words_frequencies_dict[key] == frequencies_list[i]:
-                print(str(i+1) + " : " + key + ' - ' +
+            if words_frequencies_dict[key] == frequencies_list[number]:
+                print(str(number+1) + " : " + key + ' - ' +
                       str(words_frequencies_dict[key]))
 
 
