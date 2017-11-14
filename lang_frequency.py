@@ -22,7 +22,7 @@ if __name__ == '__main__':
         simple_text = load_data(path_to_file)
         for word, frequency in get_most_frequent_words(simple_text,
                                                        number_of_words):
-            print(str(word) + " - " + str(frequency))
+            print("{0:4} - {1:5}".format(word, frequency))
     except IndexError as index_error:
         print("You must enter the path to file.")
     except OSError as file_not_found_error:
